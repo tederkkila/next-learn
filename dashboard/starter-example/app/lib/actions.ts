@@ -1,9 +1,9 @@
 'use server';
 
 import { z } from 'zod';
-import { revalidatePath } from 'next/cache';
-import {redirect} from "next/navigation";
 import postgres from 'postgres';
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 
@@ -67,7 +67,7 @@ export async function createInvoice(prevState: State, formData: FormData) {
 
 const UpdateInvoice = FormSchema.omit({ id: true, date: true });
 
-export async function updateInvoice(prevState: State, id: string, formData: FormData) {
+export async function updateInvoice(id: string, prevState: State, formData: FormData) {
   const validatedFields = UpdateInvoice.safeParse({
     customerId: formData.get('customerId'),
     amount: formData.get('amount'),

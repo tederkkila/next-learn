@@ -18,13 +18,10 @@ const FormSchema = z.object({
     .number()
     .gt(0, { message: 'Please enter an amount greater than $0.' }),
   status: z.enum(['pending', 'paid'], {
-    invalid_type_error: 'Please select an invoice status.',
+    invalid_type_error: 'Please select an invoice status.'
   }),
   date: z.string(),
 });
-
-const CreateInvoice = FormSchema.omit({ id: true, date: true });
-const UpdateInvoice = FormSchema.omit({ date: true, id: true });
 
 export type State = {
   errors?: {
@@ -34,6 +31,8 @@ export type State = {
   };
   message?: string | null;
 };
+
+const CreateInvoice = FormSchema.omit({ id: true, date: true });
 
 export async function createInvoice(prevState: State, formData: FormData) {
   // Validate form fields using Zod
@@ -74,11 +73,9 @@ export async function createInvoice(prevState: State, formData: FormData) {
   redirect('/dashboard/invoices');
 }
 
-export async function updateInvoice(
-  id: string,
-  prevState: State,
-  formData: FormData,
-) {
+const UpdateInvoice = FormSchema.omit({ id: true, date: true });
+
+export async function updateInvoice(prevState: State, id: string, formData: FormData) {
   const validatedFields = UpdateInvoice.safeParse({
     customerId: formData.get('customerId'),
     amount: formData.get('amount'),

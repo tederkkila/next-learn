@@ -4,8 +4,7 @@
     "lint": "eslint . --ext .cjs,.js,.jsx,.mjs,.ts,.tsx",
     "build": "next build",
     "dev": "next dev --turbopack",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "next start"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
